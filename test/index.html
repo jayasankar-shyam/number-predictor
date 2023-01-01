@@ -20,7 +20,6 @@
 
     const fileInput = document.querySelector('#fileInput');
     const file = fileInput.files[0];
-
     const formData = new FormData();
     formData.append('file', file);
 
@@ -30,7 +29,7 @@
     })
     .then(response => response.json())
     .then(data => {
-      responseDiv.innerHTML = JSON.stringify(data);
+      responseDiv.innerHTML = "The predicted number is "+JSON.stringify(data).slice(14,15);
     });
   });
   </script>
