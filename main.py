@@ -35,17 +35,22 @@ def index():
     if request.method == "POST":
         file = request.files.get('file')
         if file is None or file.filename == "":
-            return jsonify({"error": "no file"})
+            data = jsonify({"error": "no file"})
+            data.headers.add('Access-Control-Allow-Origin', '*')
+            return data
 
         try:
             image_bytes = file.read()
             pillow_img = Image.open(io.BytesIO(image_bytes)).convert('L')
             tensor = transform_image(pillow_img)
             prediction = predict(tensor)
-            data = {"prediction": int(prediction)}
-            return jsonify(data)
+            data = jsonify({"prediction": int(prediction)})
+            data.headers.add('Access-Control-Allow-Origin', '*')
+            return data
         except Exception as e:
-            return jsonify({"error": str(e)})
+            data = jsonify({"error": str(e)})
+            data.headers.add('Access-Control-Allow-Origin', '*')
+            return data
 
     return "OK"
 

@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>File Upload</title>
-</head>
-<body>
-  <form id="uploadForm">
-    <input type="file" name="file" id="fileInput">
-    <button type="submit">Upload</button>
-  </form>
+  <head>
+    <title>File Upload</title>
+  </head>
+  <body>
+    <form id="uploadForm">
+      <input type="file" name="file" id="fileInput" />
+      <button type="submit">Upload</button>
+    </form>
 
-  <div id="response"></div>
+    <div id="response"></div>
 
-  <script>
-  const form = document.querySelector('#uploadForm');
-  const responseDiv = document.querySelector('#response');
+    <script>
+      const form = document.querySelector("#uploadForm");
+      const responseDiv = document.querySelector("#response");
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    const fileInput = document.querySelector('#fileInput');
-    const file = fileInput.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
+        const fileInput = document.querySelector("#fileInput");
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append("file", file);
 
-    fetch('https://getprediction-gzrkj7ydfa-uc.a.run.app', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      responseDiv.innerHTML = "The predicted number is "+JSON.stringify(data).slice(14,15);
-    });
-  });
-  </script>
-</body>
+        fetch("https://getprediction-gzrkj7ydfa-uc.a.run.app", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            responseDiv.innerHTML =
+              "The predicted number is " + JSON.stringify(data).slice(14, 15);
+          });
+      });
+    </script>
+  </body>
 </html>
