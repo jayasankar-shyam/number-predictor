@@ -1,38 +1,71 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>File Upload</title>
-  </head>
-  <body>
-    <form id="uploadForm">
-      <input type="file" name="file" id="fileInput" />
-      <button type="submit">Upload</button>
-    </form>
+<html lang="en">
 
-    <div id="response"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.lordicon.com/fudrjiwc.js"></script>
+    <script src="website_files/index.js"></script>
+    <link rel="stylesheet" href="website_files/style.css">
+    <title>GCCP PROJECT</title>
+</head>
+
+<body>
+    <main>
+        <div>
+            <h1>GCCP | Project</h1>
+            <p>A ML number preditor</p>
+        </div>
+
+        <form id="uploadForm">
+            <h1>Upload Image</h1>
+            <input type="file" class="custom-file-input" name="file" id="fileInput" />
+            <button type="submit">Upload</button>
+        </form>
+
+        <div id="response">
+            No file uploaded
+        </div>
+        <div>
+            <p>Download sample pics</p>
+            <br>
+            <a href="#download"><lord-icon src="https://cdn.lordicon.com/albqovim.json" trigger="loop" delay="500"
+                    colors="primary:#fedada" state="hover-1" style="width:32px;height:32px">
+                </lord-icon>
+            </a>
+        </div>
+    </main>
+
+    <section id="download">
+        <div class="dowload_div">
+            <a href="" id="d-img" download="">Download <img src="website_files/images/download-icon.png" alt=""></a>
+        </div>
+    </section>
+
 
     <script>
-      const form = document.querySelector("#uploadForm");
-      const responseDiv = document.querySelector("#response");
+        const form = document.querySelector("#uploadForm");
+        const responseDiv = document.querySelector("#response");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
+            const fileInput = document.querySelector("#fileInput");
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
 
-        const fileInput = document.querySelector("#fileInput");
-        const file = fileInput.files[0];
-        const formData = new FormData();
-        formData.append("file", file);
-
-        fetch("https://getprediction-gzrkj7ydfa-uc.a.run.app", {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            responseDiv.innerHTML =
-              "The predicted number is " + JSON.stringify(data).slice(14, 15);
-          });
-      });
+            fetch("https://getprediction-gzrkj7ydfa-uc.a.run.app", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    responseDiv.innerHTML =
+                        "The predicted number is " + JSON.stringify(data).slice(14, 15);
+                });
+        });
     </script>
-  </body>
+</body>
+
 </html>
