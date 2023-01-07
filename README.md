@@ -4,7 +4,7 @@ This repository contains the code for a machine learning model that predicts han
 
 ## Getting Started
 
-The model is deployed on cloud run.It can be easily accessed from anywhere and through any device.
+The model is deployed on cloud run. It can be easily accessed from anywhere and through any device.
 
 For the ease of access the model has been made available through a website
 
